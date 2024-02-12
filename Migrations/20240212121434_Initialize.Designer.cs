@@ -12,7 +12,7 @@ using StoreMarket.Context;
 namespace StoreMarket.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20240205191349_Initialize")]
+    [Migration("20240212121434_Initialize")]
     partial class Initialize
     {
         /// <inheritdoc />

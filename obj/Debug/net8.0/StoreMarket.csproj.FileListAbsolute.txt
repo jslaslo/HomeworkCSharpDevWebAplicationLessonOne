@@ -77,3 +77,4 @@ D:\GeekBrines\DevWebAplication\Seminar\LessonOne\StoreMarket\bin\Debug\net8.0\Au
 D:\GeekBrines\DevWebAplication\Seminar\LessonOne\StoreMarket\bin\Debug\net8.0\Autofac.Extensions.DependencyInjection.dll
 D:\GeekBrines\DevWebAplication\Seminar\LessonOne\StoreMarket\bin\Debug\net8.0\AutoMapper.dll
 D:\GeekBrines\DevWebAplication\Seminar\LessonOne\StoreMarket\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\GeekBrines\DevWebAplication\Seminar\LessonOne\StoreMarket\obj\Debug\net8.0\StoreMarket.sourcelink.json

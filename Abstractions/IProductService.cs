@@ -1,5 +1,6 @@
 ﻿using StoreMarket.Contracts.Requests;
 using StoreMarket.Contracts.Responses;
+using StoreMarket.Models;
 
 namespace StoreMarket.Abstractions
 {
@@ -12,5 +13,6 @@ namespace StoreMarket.Abstractions
         public bool DeleteProduct(int id);
         public bool UpdatePrice(int idProduct, int price);
         public bool DeleteCategory(string category);
+        public string GetCsv(IEnumerable<Product> products);
     }
 }

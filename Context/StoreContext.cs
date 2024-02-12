@@ -22,7 +22,7 @@ namespace StoreMarket.Context
             // optionsBuilder.UseSqlServer("");
 
             optionsBuilder.LogTo(Console.WriteLine).UseSqlServer
-           (@"Server=(localdb)\mssqllocaldb;Database=helloappdb;Trusted_Connection=True;");
+           (@"Server=(localdb)\mssqllocaldb;Database=Market;Trusted_Connection=True;");
 
             //base.OnConfiguring(optionsBuilder);
         }

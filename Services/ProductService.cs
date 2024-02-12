@@ -9,6 +9,7 @@ using StoreMarket.Contracts.Responses;
 using StoreMarket.Models;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace StoreMarket.Services
 {
@@ -25,6 +26,20 @@ namespace StoreMarket.Services
             _mapper = mapper;
             _memoryCash = memoryCash;
         }
+        public string GetCsv(IEnumerable<Product> products)
+        {          
+            StringBuilder stringBuilder = new StringBuilder();
+
+            foreach (Product productItem in products)
+            {
+                stringBuilder.AppendLine(
+                    productItem.Name + ";" 
+                  + productItem.Description + ";" 
+                  + productItem.Price + "\n");
+            }
+            return stringBuilder.ToString();
+        }
+
         public int AddProduct(ProductCreateRequest product)
         {
             var mapEntity = _mapper.Map<Product>(product);
@@ -44,11 +59,11 @@ namespace StoreMarket.Services
                 _memoryCash.Remove("products");
                 return true;
             }
-            catch 
+            catch
             {
                 return false;
             }
-        
+
         }
 
         public bool DeleteProduct(int id)
@@ -104,6 +119,6 @@ namespace StoreMarket.Services
             {
                 return false;
             }
-        }
+        }        
     }
 }

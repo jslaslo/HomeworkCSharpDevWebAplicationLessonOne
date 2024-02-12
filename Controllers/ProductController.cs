@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using StoreMarket.Context;
 using StoreMarket.Contracts.Responses;
 using StoreMarket.Contracts.Requests;
-using StoreMarket.Models;
 using StoreMarket.Abstractions;
+using System.Text;
+using StoreMarket.Context;
+using StoreMarket.Models;
+
 
 namespace StoreMarket.Controllers
 {
@@ -12,10 +14,30 @@ namespace StoreMarket.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
+        private StoreContext _storeContext;
 
-        public ProductsController(IProductService productService)
+        public ProductsController(IProductService productService, StoreContext storeContext)
         {
             _productService = productService;
+            _storeContext = storeContext;
+        }
+
+        [HttpGet(template: "GetProductsCsv")]
+        public FileContentResult GetProductsCsv()
+        {
+            using (_storeContext)
+            {
+                var products = _storeContext.Products.Select(p =>
+                new Product
+                {
+                    Name = p.Name,
+                    Price = p.Price,
+                    Description = p.Description
+                }).ToList();
+                var content = _productService.GetCsv(products);
+                return File(new UTF8Encoding().GetBytes(content), "text/csv", "products.csv");
+            }
+
         }
 
         [HttpGet]
@@ -50,6 +72,7 @@ namespace StoreMarket.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
         [HttpPost]
         [Route("delete/product")]
         public ActionResult DeleteProduct(int id)
@@ -64,6 +87,7 @@ namespace StoreMarket.Controllers
                 return BadRequest();
             }
         }
+
         [HttpPost]
         [Route("delete/category")]
         public ActionResult DeleteCategory(string category)
@@ -79,6 +103,7 @@ namespace StoreMarket.Controllers
                 return BadRequest();
             }
         }
+
         [HttpPost]
         [Route("update/price")]
         public ActionResult UpdatePrice(int productId, int actualPrice)
@@ -94,5 +119,6 @@ namespace StoreMarket.Controllers
                 return BadRequest();
             }
         }
+
     }
 }
